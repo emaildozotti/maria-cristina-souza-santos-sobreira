@@ -1,140 +1,141 @@
-import FadeIn from './FadeIn'
+import { useState } from 'react'
+import { motion } from 'motion/react'
+import { FadeIn } from './FadeIn'
+import { RootsDivider } from './RootsDivider'
 
-export default function VideoSection() {
+const VIDEO_ID = 'AddLHCszm5k'
+
+export const VideoSection = () => {
+  const [playing, setPlaying] = useState(false)
+
   return (
     <section
+      className="crosshatch-dark"
       style={{
-        backgroundColor: '#1E4A2B',
-        padding: '6rem 2rem',
+        backgroundColor: '#1C1C1C',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Separator line */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: '10%',
-          right: '10%',
-          height: '1px',
-          background: 'linear-gradient(90deg, transparent, rgba(200,169,110,0.3), transparent)',
-        }}
-      />
+      <div className="container-ultra section-padding">
+        <div style={{ maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>
+          <FadeIn delay={0}>
+            <p className="eyebrow-ultra" style={{ marginBottom: '1.5rem' }}>ASSISTA ANTES DE DECIDIR</p>
+          </FadeIn>
 
-      <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-        <FadeIn>
-          <p className="eyebrow-ultra" style={{ marginBottom: '1rem' }}>
-            Para você que ainda não me conhece
-          </p>
-          <h2
-            style={{
-              fontFamily: '"DM Serif Display", serif',
-              fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
-              color: '#FAF7F2',
-              marginBottom: '1rem',
-              lineHeight: 1.25,
-            }}
-          >
-            O que nenhuma terapia anterior tocou
-          </h2>
-          <p
-            style={{
-              fontFamily: '"DM Serif Text", serif',
+          <FadeIn delay={0.1}>
+            <p style={{
+              fontFamily: 'DM Serif Text, serif',
               fontStyle: 'italic',
-              fontSize: '1.05rem',
-              lineHeight: 1.7,
-              color: 'rgba(250,247,242,0.75)',
+              fontSize: 'clamp(1rem, 1.5vw, 1.125rem)',
+              color: '#FAF7F2',
+              opacity: 0.75,
+              lineHeight: 1.75,
               marginBottom: '2.5rem',
-              maxWidth: '560px',
-              margin: '0 auto 2.5rem',
-            }}
-          >
-            Nos próximos minutos, vou te contar como descobri que a raiz do que eu carregava
-            veio de antes de eu nascer.
-          </p>
-        </FadeIn>
+            }}>
+              Gravei esse vídeo para você que já tentou de tudo e ainda sente que algo falta. Não vou te prometer milagre. Vou te mostrar como cheguei onde as terapias anteriores não chegaram. Assista com calma.
+            </p>
+          </FadeIn>
 
-        <FadeIn delay={0.2}>
-          {/* Video container 9:16 */}
-          <div
-            style={{
-              margin: '0 auto 2.5rem',
-              width: '100%',
-              maxWidth: '300px',
+          <FadeIn delay={0.2}>
+            <div style={{
               position: 'relative',
-            }}
-          >
-            <div
-              style={{
-                position: 'relative',
-                paddingBottom: '177.78%', /* 16/9 */
-                height: 0,
-                overflow: 'hidden',
-                backgroundColor: '#0f2a17',
-                outline: '2px solid rgba(200,169,110,0.45)',
-                outlineOffset: '6px',
-              }}
-            >
-              {/* YouTube iframe — URL PENDENTE */}
+              maxWidth: '400px',
+              margin: '0 auto 2.5rem',
+              border: '1px solid rgba(200,169,110,0.2)',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              aspectRatio: '9/16',
+            }}>
+              {!playing ? (
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(180deg, #1E4A2B 0%, #1C1C1C 100%)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    zIndex: 2,
+                  }}
+                  onClick={() => setPlaying(true)}
+                >
+                  <span style={{
+                    fontFamily: 'DM Serif Display, serif',
+                    fontSize: '3rem',
+                    color: '#C8A96E',
+                    opacity: 0.4,
+                    marginBottom: '1.5rem',
+                    display: 'block',
+                  }}>CS</span>
+
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.96 }}
+                    style={{
+                      width: '72px',
+                      height: '72px',
+                      borderRadius: '50%',
+                      backgroundColor: '#C8A96E',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 0 40px rgba(200,169,110,0.25)',
+                    }}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M8 5L19 12L8 19V5Z" fill="#1E4A2B"/>
+                    </svg>
+                  </motion.div>
+
+                  <p style={{
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '0.75rem',
+                    color: '#FAF7F2',
+                    opacity: 0.5,
+                    marginTop: '1rem',
+                    letterSpacing: '0.08em',
+                  }}>ASSISTIR AGORA</p>
+                </div>
+              ) : null}
+
               <iframe
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  border: 'none',
-                }}
-                src="https://www.youtube.com/embed/AddLHCszm5k"
-                title="Cristina Sobreira: Cura Interior de Raiz"
+                src={playing ? `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0` : `https://www.youtube.com/embed/${VIDEO_ID}?rel=0`}
+                title="Cristina Sobreira — O Código da Cura"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-              />
-
-              {/* Placeholder visível enquanto URL não é substituída */}
-              <div
                 style={{
                   position: 'absolute',
                   inset: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: '#0f2a17',
-                  gap: '1rem',
-                  pointerEvents: 'none',
+                  width: '100%',
+                  height: '100%',
+                  border: 'none',
+                  zIndex: 1,
                 }}
-              >
-                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden="true">
-                  <circle cx="28" cy="28" r="27" stroke="#C8A96E" strokeWidth="1.5" opacity="0.5" />
-                  <polygon points="22,18 42,28 22,38" fill="#C8A96E" opacity="0.7" />
-                </svg>
-                <span
-                  style={{
-                    fontFamily: '"Inter", sans-serif',
-                    fontSize: '0.7rem',
-                    color: 'rgba(200,169,110,0.5)',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  Vídeo em breve
-                </span>
-              </div>
+              />
             </div>
-          </div>
-        </FadeIn>
+          </FadeIn>
 
-        <FadeIn delay={0.3}>
-          <button
-            onClick={() => document.getElementById('metodo')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-shimmer-light"
-          >
-            O que o processo faz diferente
-          </button>
-        </FadeIn>
+          <FadeIn delay={0.35}>
+            <p style={{
+              fontFamily: 'DM Serif Text, serif',
+              fontStyle: 'italic',
+              fontSize: 'clamp(0.9375rem, 1.2vw, 1rem)',
+              color: '#FAF7F2',
+              opacity: 0.6,
+              lineHeight: 1.7,
+              marginBottom: '3rem',
+            }}>
+              O que eu acabei de explicar tem um nome e tem uma lógica. Deixa eu te mostrar como funciona de verdade.
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={0.4}>
+            <RootsDivider opacity={0.25} />
+          </FadeIn>
+        </div>
       </div>
     </section>
   )

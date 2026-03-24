@@ -1,251 +1,208 @@
-import FadeIn from './FadeIn'
+import { useState } from 'react'
+import { FadeIn } from './FadeIn'
+import { RootsDivider } from './RootsDivider'
 
-function RootsSVGAbout() {
+const RootsSVGAbout = () => (
+  <svg
+    viewBox="0 0 300 150"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      width: '100%',
+      zIndex: 0,
+      pointerEvents: 'none',
+      userSelect: 'none',
+      opacity: 0.15,
+    }}
+  >
+    <path d="M150 20 Q130 50 110 75 Q90 100 70 115 Q50 130 30 135" stroke="#C8A96E" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+    <path d="M150 20 Q170 50 190 75 Q210 100 230 115 Q250 130 270 135" stroke="#C8A96E" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+    <path d="M150 20 Q140 45 125 65 Q110 85 100 100 Q90 112 85 125" stroke="#C8A96E" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.7"/>
+    <path d="M150 20 Q160 45 175 65 Q190 85 200 100 Q210 112 215 125" stroke="#C8A96E" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.7"/>
+    <path d="M150 20 Q148 60 145 85 Q142 105 140 130" stroke="#C8A96E" strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.6"/>
+  </svg>
+)
+
+export const About = () => {
+  const [imgError, setImgError] = useState(false)
+
   return (
-    <svg
-      viewBox="0 0 300 200"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
-        width: '60%',
-        height: 'auto',
-        opacity: 0.12,
-        pointerEvents: 'none',
-      }}
-      aria-hidden="true"
-    >
-      <path d="M150 200 C150 160 135 130 115 100 C100 75 85 50 65 25" stroke="#1E4A2B" strokeWidth="2" strokeLinecap="round" fill="none" />
-      <path d="M150 200 C150 165 165 135 185 110 C200 88 215 62 230 35" stroke="#1E4A2B" strokeWidth="2" strokeLinecap="round" fill="none" />
-      <path d="M138 175 C120 158 98 152 75 148" stroke="#1E4A2B" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-      <path d="M162 170 C180 155 200 150 225 148" stroke="#1E4A2B" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-    </svg>
-  )
-}
-
-export default function About() {
-  return (
-    <section
-      id="sobre"
-      style={{
-        backgroundColor: '#F0E8DA',
-        padding: '7rem 2rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      <RootsSVGAbout />
-
-      <div
-        style={{
-          maxWidth: '1100px',
-          margin: '0 auto',
+    <section style={{ backgroundColor: '#F0E8DA', position: 'relative', overflow: 'hidden' }}>
+      <div className="container-ultra section-padding">
+        <div style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
+          gridTemplateColumns: '1fr minmax(280px, 420px)',
           gap: '5rem',
           alignItems: 'center',
-        }}
-        className="about-grid"
-      >
-        {/* TEXT — order-2 mobile, order-1 desktop */}
-        <div className="about-text" style={{ order: 2 }}>
-          <FadeIn>
-            <p className="eyebrow-ultra" style={{ color: '#1E4A2B', marginBottom: '1rem' }}>
-              Quem é Cristina
-            </p>
-            <h2
-              style={{
-                fontFamily: '"DM Serif Display", serif',
-                fontSize: 'clamp(1.7rem, 2.8vw, 2.5rem)',
-                color: '#1E4A2B',
-                lineHeight: 1.25,
-                marginBottom: '0.75rem',
-              }}
-            >
-              Antes de ajudar alguém, precisei me salvar.
-            </h2>
+        }}>
+          {/* Left: Text */}
+          <div>
+            <FadeIn delay={0}>
+              <p className="eyebrow-ultra" style={{ marginBottom: '1.25rem', color: '#C8A96E' }}>ANTES DE AJUDAR ALGUÉM</p>
+            </FadeIn>
 
-            {/* Blockquote editorial */}
-            <blockquote
-              style={{
-                borderLeft: '3px solid #C8A96E',
-                paddingLeft: '1.25rem',
-                margin: '1.5rem 0',
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: '"DM Serif Text", serif',
-                  fontStyle: 'italic',
-                  fontSize: '1.05rem',
-                  lineHeight: 1.7,
-                  color: '#3a3a3a',
-                }}
-              >
+            <FadeIn delay={0.1}>
+              <h2 style={{
+                fontFamily: 'DM Serif Display, serif',
+                fontSize: 'clamp(1.75rem, 3vw, 2.75rem)',
+                color: '#1E4A2B',
+                marginBottom: '1.25rem',
+                lineHeight: 1.2,
+              }}>
+                Antes de ajudar alguém, precisei me salvar.
+              </h2>
+            </FadeIn>
+
+            <FadeIn delay={0.15}>
+              <p style={{
+                fontFamily: 'DM Serif Text, serif',
+                fontStyle: 'italic',
+                fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
+                color: '#C8A96E',
+                marginBottom: '2rem',
+                lineHeight: 1.6,
+              }}>
                 "Fui rejeitada antes de nascer. Cresci achando que o problema era eu."
               </p>
-            </blockquote>
-          </FadeIn>
+            </FadeIn>
 
-          <FadeIn delay={0.1}>
-            <p
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '0.9rem',
-                lineHeight: 1.85,
-                color: '#4a4a4a',
-                marginBottom: '1.25rem',
-              }}
-            >
-              Minha mãe tentou interromper a gravidez. Antes de eu ter consciência do mundo,
-              meu corpo já carregava a mensagem de que eu não era bem-vinda. Cresci com um
-              pai narcisista que reforçou essa programação todos os dias. Não importava o que
-              eu fizesse: nunca era suficiente. O resultado veio no corpo. Depressão profunda.
-              Síndrome do pânico. Anos de medicação controlada. Cada comprimido silenciava o
-              sintoma, mas a ferida continuava aberta, sangrando por baixo da anestesia.
-            </p>
-          </FadeIn>
+            <FadeIn delay={0.2}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2.5rem' }}>
+                <p style={{
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: 'clamp(0.875rem, 1.1vw, 0.9375rem)',
+                  color: '#1C1C1C',
+                  opacity: 0.75,
+                  lineHeight: 1.85,
+                }}>
+                  Minha mãe não queria me ter. Cresci sentindo isso no corpo antes de entender com a cabeça. Fui a menina que precisava ser invisível para não incomodar. A adulta que aprendeu a sorrir enquanto carregava um peso que ninguém via.
+                </p>
+                <p style={{
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: 'clamp(0.875rem, 1.1vw, 0.9375rem)',
+                  color: '#1C1C1C',
+                  opacity: 0.75,
+                  lineHeight: 1.85,
+                }}>
+                  Fiz terapia por anos. Cada terapeuta chegava até certo ponto e não passava. A dor voltava. A sensação de não ser bem-vinda continuava. Foi quando mergulhei na hipnose clínica e na reprogramação emocional que finalmente cheguei na raiz. Não no que eu sentia. Em por que eu sentia.
+                </p>
+                <p style={{
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: 'clamp(0.875rem, 1.1vw, 0.9375rem)',
+                  color: '#1C1C1C',
+                  opacity: 0.75,
+                  lineHeight: 1.85,
+                }}>
+                  Hoje, ajudo mulheres a fazer o mesmo caminho. Não porque aprendi em livros. Porque precisei percorrer cada passo dentro de mim primeiro.
+                </p>
+              </div>
+            </FadeIn>
 
-          <FadeIn delay={0.2}>
-            <p
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '0.9rem',
-                lineHeight: 1.85,
-                color: '#4a4a4a',
-                marginBottom: '1.25rem',
-              }}
-            >
-              O momento de virada não foi bonito. Foi desesperador. Quando entendi que a
-              medicação estava me mantendo viva, mas não estava me curando, busquei algo
-              diferente. Encontrei a Cura Interior. E pela primeira vez, alguém me levou até
-              a raiz: não o que eu sentia, mas por que eu sentia. A ferida de rejeição que
-              antecedia qualquer memória consciente.
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={0.3}>
-            <p
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '0.9rem',
-                lineHeight: 1.85,
-                color: '#4a4a4a',
-                marginBottom: '1.75rem',
-              }}
-            >
-              Hoje conduzo mulheres pelo mesmo caminho. Com O Código da Cura, integro Hipnose
-              Clínica, TCC, Meditação e Reprogramação Emocional para chegar onde a terapia
-              convencional não chega. Não porque a terapia convencional seja ruim, mas porque
-              ela não foi desenhada para alcançar feridas que vieram antes das palavras.
-            </p>
-
-            <div
-              style={{
-                display: 'flex',
-                gap: '0.5rem',
+            <FadeIn delay={0.3}>
+              <div style={{
+                display: 'inline-flex',
+                gap: '1rem',
                 flexWrap: 'wrap',
-              }}
-            >
-              {['Hipnose Clínica', 'Terapia Cognitivo-Comportamental', 'Reprogramação Emocional'].map(
-                cred => (
-                  <span
-                    key={cred}
-                    style={{
-                      fontFamily: '"Inter", sans-serif',
-                      fontSize: '0.7rem',
-                      fontWeight: 600,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      color: '#1E4A2B',
-                      border: '1px solid rgba(30,74,43,0.3)',
-                      padding: '0.35rem 0.75rem',
-                    }}
-                  >
-                    {cred}
-                  </span>
-                )
-              )}
-            </div>
-          </FadeIn>
+                padding: '0.875rem 1.25rem',
+                backgroundColor: 'rgba(30,74,43,0.08)',
+                borderRadius: '8px',
+                border: '1px solid rgba(200,169,110,0.2)',
+                marginBottom: '2.5rem',
+              }}>
+                {['Hipnose Clínica', 'Terapia Cognitivo-Comportamental', 'Reprogramação Emocional'].map((cred) => (
+                  <span key={cred} style={{
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '0.75rem',
+                    fontWeight: 500,
+                    letterSpacing: '0.06em',
+                    color: '#1E4A2B',
+                    opacity: 0.8,
+                  }}>{cred}</span>
+                ))}
+              </div>
+            </FadeIn>
 
-          <FadeIn delay={0.4}>
-            <p
-              style={{
-                fontFamily: '"DM Serif Text", serif',
+            <FadeIn delay={0.35}>
+              <p style={{
+                fontFamily: 'DM Serif Text, serif',
                 fontStyle: 'italic',
-                fontSize: '0.95rem',
-                lineHeight: 1.7,
-                color: '#C8A96E',
-                marginTop: '1.75rem',
-              }}
-            >
-              E foi por essa travessia que estruturei cada etapa do processo com cuidado.
-            </p>
-          </FadeIn>
-        </div>
+                color: '#1C1C1C',
+                opacity: 0.55,
+                fontSize: 'clamp(0.875rem, 1.1vw, 1rem)',
+                marginBottom: '3rem',
+              }}>
+                E foi por essa travessia que estruturei cada etapa do processo com cuidado.
+              </p>
+            </FadeIn>
 
-        {/* PHOTO — order-1 mobile, order-2 desktop */}
-        <div className="about-photo" style={{ order: 1, position: 'relative' }}>
-          <FadeIn>
-            <div
-              style={{
+            <FadeIn delay={0.4}>
+              <RootsDivider opacity={0.35} />
+            </FadeIn>
+          </div>
+
+          {/* Right: Photo */}
+          <FadeIn delay={0.2} direction="left">
+            <div style={{ position: 'relative' }}>
+              <div style={{
                 position: 'relative',
-                width: '100%',
-                aspectRatio: '3/4',
-                maxWidth: '420px',
-                margin: '0 auto',
-                backgroundColor: '#d4c9b8',
+                borderRadius: '16px 4px 16px 4px',
                 overflow: 'hidden',
-              }}
-            >
-              <img
-                src="/foto-cristina-sobre.jpg"
-                alt="Cristina Sobreira"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center top',
-                  mixBlendMode: 'multiply',
-                }}
-                onError={e => {
-                  const el = e.currentTarget
-                  el.style.display = 'none'
-                }}
-              />
+                aspectRatio: '3/4',
+              }}>
+                {!imgError ? (
+                  <img
+                    src="/foto-cristina-sobre.jpg"
+                    alt="Cristina Sobreira — Sobre"
+                    className="client-photo"
+                    onError={() => setImgError(true)}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      opacity: 0.92,
+                    }}
+                  />
+                ) : (
+                  <div style={{
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(30,74,43,0.2)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <span style={{
+                      fontFamily: 'DM Serif Display, serif',
+                      fontSize: '4rem',
+                      color: '#C8A96E',
+                      opacity: 0.4,
+                    }}>CS</span>
+                  </div>
+                )}
+                <RootsSVGAbout />
+              </div>
 
-              {/* Accent border */}
-              <div
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  bottom: '-12px',
-                  right: '-12px',
-                  width: '50%',
-                  height: '50%',
-                  borderBottom: '2px solid #C8A96E',
-                  borderRight: '2px solid #C8A96E',
-                  pointerEvents: 'none',
-                }}
-              />
+              {/* Decorative accent line */}
+              <div style={{
+                position: 'absolute',
+                bottom: '-12px',
+                right: '-12px',
+                width: '60%',
+                height: '60%',
+                border: '2px solid rgba(200,169,110,0.25)',
+                borderRadius: '0 0 16px 0',
+                pointerEvents: 'none',
+                borderTop: 'none',
+                borderLeft: 'none',
+              }} />
             </div>
           </FadeIn>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 767px) {
-          .about-grid {
-            grid-template-columns: 1fr !important;
-            gap: 2.5rem !important;
-          }
-          .about-text { order: 1 !important; }
-          .about-photo { order: 2 !important; }
-        }
-      `}</style>
     </section>
   )
 }

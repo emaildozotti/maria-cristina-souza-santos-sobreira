@@ -1,231 +1,186 @@
-import { useState, useEffect } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
-import FadeIn from './FadeIn'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import { FadeIn } from './FadeIn'
 
-const WA_LINK = 'https://wa.me/5527981038931?text=Ol%C3%A1%20Cristina!%20Vi%20sua%20p%C3%A1gina%20e%20quero%20saber%20mais%20sobre%20o%20processo%20de%20Cura%20Interior.'
-
-const testimonials = [
+const TESTIMONIALS = [
   {
-    initials: 'M.R.',
-    text: 'Passei 8 anos tomando remédio e achando que era isso pra sempre. Com a Cristina entendi que eu não tinha um problema químico: eu tinha uma ferida que nunca ninguém tinha me ajudado a ver de verdade. Em 4 meses do Código da Cura fui reduzindo com supervisão médica e hoje estou há 1 ano sem medicação. Não me reconheço mais na mulher que eu era.',
-    attribution: '— M.R.',
+    name: 'Fernanda R., 42, Vitória',
+    result: '15 anos em terapia, finalmente chegou na origem',
+    highlight: 'foi por que eu sentia',
+    text: 'Passei 15 anos em terapia. Melhorava, depois voltava ao mesmo padrão. Com a Cristina, pela primeira vez alguém me levou até a origem. Não foi o que eu sentia que mudou. Foi por que eu sentia. Hoje consigo existir sem precisar provar nada para ninguém.',
   },
   {
-    initials: 'A.P.',
-    text: 'Eu achava que era fraca porque não conseguia largar um casamento que me destruía. A Cristina me fez enxergar que eu não estava presa por fraqueza: estava presa porque nunca aprendi que eu merecia espaço. Quando entendi a raiz disso, tudo mudou. Hoje me reconheço quando olho no espelho, coisa que não acontecia há anos.',
-    attribution: '— A.P.',
+    name: 'Juliana M., 38, Vila Velha',
+    result: 'Chorava escondida, hoje se sente cuidada de verdade',
+    highlight: 'ferida aberta que ninguém tinha olhado',
+    text: 'Eu tinha vergonha de admitir que, mesmo com a vida funcionando, eu chorava escondida no banheiro. A Cristina não me julgou. Me mostrou que aquela dor não era fraqueza. Era uma ferida aberta que ninguém tinha olhado. O processo foi intenso, mas pela primeira vez eu me senti cuidada de verdade.',
   },
   {
-    initials: 'C.S.',
-    text: 'A minha vida toda foi em torno de agradar as pessoas e nunca ser suficiente pra mim mesma. Vim de uma família onde nunca me senti bem-vinda de verdade. A Cristina foi a primeira terapeuta que foi fundo nessa raiz: não ficou só na superfície dos sintomas. Hoje consigo me colocar em primeiro lugar sem sentir culpa. Isso para mim vale mais do que qualquer coisa.',
-    attribution: '— C.S.',
+    name: 'Patrícia S., 45, Vitória',
+    result: 'Tinha medo da hipnose. Voltou a sentir sem medo',
+    highlight: 'Ganhei acesso a coisas que eu carregava sem saber',
+    text: 'Tinha medo da hipnose. Achava que ia perder o controle. Não perdi nada. Ganhei acesso a coisas que eu carregava sem saber. Em três meses, parei de funcionar no automático. Voltei a sentir. E dessa vez, sem medo.',
   },
 ]
 
-export default function Testimonials() {
+function highlightText(text: string, highlight: string) {
+  if (!highlight) return <>{text}</>
+  const idx = text.indexOf(highlight)
+  if (idx === -1) return <>{text}</>
+  return (
+    <>
+      {text.slice(0, idx)}
+      <span style={{ color: '#C8A96E', fontWeight: 700 }}>{highlight}</span>
+      {text.slice(idx + highlight.length)}
+    </>
+  )
+}
+
+export const Testimonials = () => {
   const [current, setCurrent] = useState(0)
   const [paused, setPaused] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
     if (paused) return
-    const timer = setInterval(() => {
-      setCurrent(prev => (prev + 1) % testimonials.length)
-    }, 7000)
-    return () => clearInterval(timer)
-  }, [paused])
-
-  const prev = () => {
-    setPaused(true)
-    setCurrent(c => (c - 1 + testimonials.length) % testimonials.length)
-  }
-
-  const next = () => {
-    setPaused(true)
-    setCurrent(c => (c + 1) % testimonials.length)
-  }
+    timerRef.current = setInterval(() => {
+      setCurrent(c => (c + 1) % TESTIMONIALS.length)
+    }, 6000)
+    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+  }, [paused, current])
 
   return (
     <section
-      id="depoimentos"
+      id="testimonials"
+      className="diagonal-lines"
       style={{
-        backgroundColor: '#F0E8DA',
-        padding: '7rem 2rem',
+        backgroundColor: '#1E4A2B',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <FadeIn>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <p className="eyebrow-ultra" style={{ color: '#1E4A2B', marginBottom: '1rem' }}>
-              Resultados reais
-            </p>
-            <h2
-              style={{
-                fontFamily: '"DM Serif Display", serif',
-                fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
-                color: '#1E4A2B',
-                lineHeight: 1.25,
-              }}
-            >
-              Mulheres que saíram do modo sobrevivência
+      <div className="container-ultra section-padding">
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <FadeIn delay={0}>
+            <p className="eyebrow-ultra" style={{ marginBottom: '1.25rem' }}>O QUE DIZEM AS MULHERES</p>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <h2 style={{
+              fontFamily: 'DM Serif Display, serif',
+              fontSize: 'clamp(1.75rem, 3vw, 2.75rem)',
+              color: '#FAF7F2',
+              lineHeight: 1.2,
+            }}>
+              Mulheres que saíram do{' '}
+              <em style={{ color: '#C8A96E' }}>modo sobrevivência</em>
             </h2>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        </div>
 
-        {/* Carrossel crossfade */}
         <div
-          style={{ position: 'relative', minHeight: '320px' }}
+          style={{ maxWidth: '720px', margin: '0 auto', position: 'relative', minHeight: '340px' }}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          {/* Aspa decorativa */}
-          <span
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              top: '-1.5rem',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              fontFamily: '"DM Serif Display", serif',
-              fontSize: '8rem',
-              lineHeight: 1,
-              color: '#C8A96E',
-              opacity: 0.2,
-              userSelect: 'none',
-              pointerEvents: 'none',
-            }}
-          >
-            "
-          </span>
+          {/* Aspa gigante */}
+          <div style={{
+            position: 'absolute',
+            top: '-1.5rem',
+            left: '0',
+            fontFamily: 'DM Serif Display, serif',
+            fontSize: '10rem',
+            color: '#FAF7F2',
+            opacity: 0.06,
+            lineHeight: 1,
+            pointerEvents: 'none',
+            userSelect: 'none',
+          }}>"</div>
 
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.7, ease: 'easeInOut' }}
-              style={{ textAlign: 'center', padding: '3rem 1.5rem 0' }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              style={{
+                backgroundColor: 'rgba(30,74,43,0.5)',
+                border: '1px solid rgba(200,169,110,0.12)',
+                borderRadius: '16px 4px 16px 4px',
+                padding: '2.5rem',
+              }}
             >
-              <p
-                style={{
-                  fontFamily: '"DM Serif Text", serif',
-                  fontStyle: 'italic',
-                  fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
-                  lineHeight: 1.8,
-                  color: '#3a3a3a',
-                  marginBottom: '1.75rem',
-                }}
-              >
-                "{testimonials[current].text}"
-              </p>
-              <p
-                style={{
-                  fontFamily: '"Inter", sans-serif',
+              {/* Result badge */}
+              <div style={{
+                display: 'inline-flex',
+                backgroundColor: 'rgba(200,169,110,0.12)',
+                border: '1px solid rgba(200,169,110,0.3)',
+                borderRadius: '9999px',
+                padding: '0.375rem 1rem',
+                marginBottom: '1.5rem',
+              }}>
+                <span style={{
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: '0.6875rem',
                   fontWeight: 600,
-                  fontSize: '0.8rem',
-                  letterSpacing: '0.12em',
+                  letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   color: '#C8A96E',
-                }}
-              >
-                {testimonials[current].attribution}
+                }}>
+                  {TESTIMONIALS[current].result}
+                </span>
+              </div>
+
+              <p style={{
+                fontFamily: 'DM Serif Text, serif',
+                fontStyle: 'italic',
+                fontSize: 'clamp(0.9375rem, 1.3vw, 1.0625rem)',
+                color: '#FAF7F2',
+                opacity: 0.9,
+                lineHeight: 1.8,
+                marginBottom: '2rem',
+              }}>
+                {highlightText(TESTIMONIALS[current].text, TESTIMONIALS[current].highlight)}
+              </p>
+
+              <p style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '0.8125rem',
+                fontWeight: 500,
+                color: '#C8A96E',
+                opacity: 0.75,
+                letterSpacing: '0.06em',
+              }}>
+                — {TESTIMONIALS[current].name}
               </p>
             </motion.div>
           </AnimatePresence>
 
-          {/* Controls */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '1.5rem',
-              marginTop: '2.5rem',
-            }}
-          >
-            <button
-              onClick={prev}
-              aria-label="Depoimento anterior"
-              style={{
-                background: 'none',
-                border: '1.5px solid rgba(200,169,110,0.4)',
-                width: '40px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                color: '#C8A96E',
-                transition: 'border-color 0.2s ease',
-              }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = '#C8A96E')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(200,169,110,0.4)')}
-            >
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M9 2L4 7L9 12" stroke="#C8A96E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-
-            {/* Dots */}
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => { setPaused(true); setCurrent(i) }}
-                  aria-label={`Depoimento ${i + 1}`}
-                  style={{
-                    width: i === current ? '24px' : '8px',
-                    height: '8px',
-                    borderRadius: '4px',
-                    backgroundColor: i === current ? '#C8A96E' : 'rgba(200,169,110,0.3)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    padding: 0,
-                  }}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={next}
-              aria-label="Próximo depoimento"
-              style={{
-                background: 'none',
-                border: '1.5px solid rgba(200,169,110,0.4)',
-                width: '40px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                color: '#C8A96E',
-                transition: 'border-color 0.2s ease',
-              }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = '#C8A96E')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(200,169,110,0.4)')}
-            >
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M5 2L10 7L5 12" stroke="#C8A96E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
+          {/* Indicator bars */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '0.5rem',
+            marginTop: '2rem',
+          }}>
+            {TESTIMONIALS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                style={{
+                  height: '3px',
+                  width: i === current ? '28px' : '8px',
+                  backgroundColor: i === current ? '#C8A96E' : 'rgba(255,255,255,0.3)',
+                  borderRadius: '9999px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'width 0.3s ease, background-color 0.3s ease',
+                  padding: 0,
+                }}
+              />
+            ))}
           </div>
         </div>
-
-        <FadeIn delay={0.2}>
-          <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-shimmer"
-            >
-              Restam dúvidas?
-            </a>
-          </div>
-        </FadeIn>
       </div>
     </section>
   )

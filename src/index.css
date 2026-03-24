@@ -1,245 +1,258 @@
+/* ============================================================
+   CRISTINA SOBREIRA — LP v2
+   Pipeline v7.1.0 — Verde Floresta + Dourado
+   ============================================================ */
+
+/* 1. GLOBAL RESETS PREMIUM */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+p {
+  margin: 0;
+}
+
+/* 2. TAILWIND IMPORT */
 @import "tailwindcss";
 
+/* 3. DESIGN TOKENS */
 @theme {
   --color-primary: #1E4A2B;
-  --color-accent: #C8A96E;
+  --color-primary-dark: #152E1B;
+  --color-secondary: #C8A96E;
+  --color-dark: #1E4A2B;
   --color-bg-warm: #F0E8DA;
   --color-bg-light: #FAF7F2;
-  --color-text-main: #1C1C1C;
   --color-off-white: #E8EDE6;
+  --color-text-main: #1C1C1C;
 
-  --font-serif-display: "DM Serif Display", serif;
-  --font-serif-text: "DM Serif Text", serif;
-  --font-body: "Inter", sans-serif;
+  --font-display: 'DM Serif Display', serif;
+  --font-sub: 'DM Serif Text', serif;
+  --font-sans: 'Inter', sans-serif;
+
+  --container-width: 1200px;
+  --section-py: 6rem;
+  --section-py-lg: 10rem;
 }
 
-@layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: var(--font-body);
-    color: var(--color-text-main);
-    background-color: var(--color-bg-light);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1, h2, h3, h4 {
-    font-family: var(--font-serif-display);
-  }
+/* 4. CLASSES BASE */
+.eyebrow-ultra {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  opacity: 0.75;
 }
 
-@layer components {
-  .section-padding {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-
-  .section-padding-lg {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
-  }
-
-  .eyebrow-ultra {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-  }
-
-  .btn-shimmer {
-    display: inline-block;
-    padding: 1.25rem 2.5rem;
-    background-color: var(--color-accent);
-    color: #1C1C1C;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.875rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-
-  .btn-shimmer::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent
-    );
-    transition: left 0.5s ease;
-  }
-
-  .btn-shimmer:hover::after {
-    left: 140%;
-  }
-
-  .btn-shimmer:hover {
-    background-color: #b8943e;
-    transform: translateY(-1px);
-  }
-
-  .btn-shimmer-sm {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: var(--color-accent);
-    color: #1C1C1C;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-
-  .btn-shimmer-sm::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent
-    );
-    transition: left 0.5s ease;
-  }
-
-  .btn-shimmer-sm:hover::after {
-    left: 140%;
-  }
-
-  .btn-shimmer-sm:hover {
-    background-color: #b8943e;
-    transform: translateY(-1px);
-  }
-
-  .btn-shimmer-light {
-    display: inline-block;
-    padding: 1.25rem 2.5rem;
-    background-color: transparent;
-    color: var(--color-accent);
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.875rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1.5px solid var(--color-accent);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  }
-
-  .btn-shimmer-light:hover {
-    background-color: var(--color-accent);
-    color: #1C1C1C;
-    transform: translateY(-1px);
-  }
+.container-ultra {
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-@layer utilities {
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--color-bg-light);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-accent);
-    border-radius: 3px;
-  }
+.section-padding {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
 }
 
-/* Shimmer sweep keyframe (spec-compliant) */
+.section-padding-lg {
+  padding-top: var(--section-py-lg);
+  padding-bottom: var(--section-py-lg);
+}
+
+/* 5. HELPER CLASSES */
+.blur-orb {
+  filter: blur(120px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.line-separator {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(200,169,110,0.3) 50%, transparent 100%);
+  border: none;
+}
+
+.client-photo {
+  filter: contrast(1.05) saturate(0.9) brightness(0.97);
+  transition: filter 0.4s ease;
+}
+
+.client-photo:hover {
+  filter: contrast(1.08) saturate(1.0) brightness(1.0);
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 60%,
+    rgba(30, 74, 43, 0.5) 100%
+  );
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* 6. SCROLLBAR */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B8925A;
+}
+
+/* 7. AURORA KEYFRAMES */
+@keyframes aurora-1 {
+  0%   { transform: translate(0%, 0%) scale(1);     opacity: 0.45; }
+  25%  { transform: translate(8%, -12%) scale(1.1); opacity: 0.55; }
+  50%  { transform: translate(15%, 5%) scale(0.95); opacity: 0.35; }
+  75%  { transform: translate(-5%, 10%) scale(1.05); opacity: 0.5; }
+  100% { transform: translate(0%, 0%) scale(1);     opacity: 0.45; }
+}
+
+@keyframes aurora-2 {
+  0%   { transform: translate(0%, 0%) scale(1);      opacity: 0.35; }
+  25%  { transform: translate(-10%, 8%) scale(1.08); opacity: 0.45; }
+  50%  { transform: translate(12%, -8%) scale(1.12); opacity: 0.28; }
+  75%  { transform: translate(4%, 15%) scale(0.92);  opacity: 0.42; }
+  100% { transform: translate(0%, 0%) scale(1);      opacity: 0.35; }
+}
+
+@keyframes aurora-3 {
+  0%   { transform: translate(0%, 0%) scale(1);      opacity: 0.25; }
+  25%  { transform: translate(12%, 10%) scale(0.9);  opacity: 0.35; }
+  50%  { transform: translate(-8%, -10%) scale(1.1); opacity: 0.20; }
+  75%  { transform: translate(-15%, 5%) scale(1.05); opacity: 0.30; }
+  100% { transform: translate(0%, 0%) scale(1);      opacity: 0.25; }
+}
+
+/* 8. BTN-SHIMMER (luxury — 4s delay 2s) */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 35%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 100%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  animation: shimmer-sweep 4s ease-in-out 2s infinite;
+  pointer-events: none;
+}
+
+/* 9. BTN-SHIMMER-LIGHT */
+.btn-shimmer-light {
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  border: 1.5px solid var(--color-secondary);
+  color: var(--color-secondary);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.15s ease;
+}
+
+.btn-shimmer-light::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 35%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(200, 169, 110, 0.12) 50%,
+    transparent 100%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  animation: shimmer-sweep 4s ease-in-out 2s infinite;
+  pointer-events: none;
+}
+
+/* 10. SHIMMER KEYFRAMES */
 @keyframes shimmer-sweep {
   0%   { transform: translateX(-150%) skewX(-20deg); }
-  100% { transform: translateX(250%) skewX(-20deg); }
+  100% { transform: translateX(350%) skewX(-20deg); }
 }
 
-/* Aurora keyframes */
-@keyframes aurora-drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
+/* 11. DIAGONAL LINES PATTERN */
+.diagonal-lines {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 40px,
+    rgba(200, 169, 110, 0.03) 40px,
+    rgba(200, 169, 110, 0.03) 41px
+  );
 }
 
-@keyframes aurora-drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-25px, 20px) scale(1.08); }
-  66% { transform: translate(20px, -10px) scale(0.97); }
-}
-
-@keyframes aurora-drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(15px, 25px) scale(1.03); }
-}
-
-/* Hero fadeUp animation */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-animate-0 {
-  animation: fadeUp 0.9s ease forwards;
-  opacity: 0;
-}
-
-.hero-animate-1 {
-  animation: fadeUp 0.9s 0.15s ease forwards;
-  opacity: 0;
-}
-
-.hero-animate-2 {
-  animation: fadeUp 0.9s 0.30s ease forwards;
-  opacity: 0;
-}
-
-.hero-animate-3 {
-  animation: fadeUp 0.9s 0.45s ease forwards;
-  opacity: 0;
-}
-
-/* Testimonials crossfade */
-@keyframes fadeInOut {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+/* 12. CROSSHATCH DARK */
+.crosshatch-dark {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 41px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 41px
+    );
 }

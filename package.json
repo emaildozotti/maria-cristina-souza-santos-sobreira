@@ -1,11 +1,11 @@
 {
-  "name": "cristina-sobreira-lp",
+  "name": "maria-cristina-lp-v2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,162 +1,140 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
-import FadeIn from './FadeIn'
+import { motion, AnimatePresence } from 'motion/react'
+import { FadeIn } from './FadeIn'
 
-const faqs = [
+const FAQS = [
   {
     q: 'Já fiz terapia antes e não funcionou. Por que seria diferente?',
-    a: 'Você não falhou na terapia. A terapia falhou em ir fundo o suficiente. O Código da Cura foi criado por quem precisou ir mais fundo do que qualquer método convencional alcançou. Aqui, não trabalhamos o sintoma. Trabalhamos a raiz que o alimenta.',
+    a: 'Porque a maioria das terapias trabalha o que você pensa e sente hoje. O Código da Cura vai onde essas terapias não chegaram: a ferida original, gravada antes da memória consciente. Não é uma terapia de conversa. É um trabalho de reprogramação emocional profunda.',
   },
   {
     q: 'Funciona online?',
-    a: 'Sim. O atendimento é 100% online, com sessões por vídeo. A cura interior não depende de presença física. Depende de presença emocional, e essa acontece onde você se sentir segura.',
+    a: 'Sim. As sessões são 100% online e funcionam com a mesma profundidade do presencial. O que precisamos é de um espaço tranquilo onde você possa se sentir segura. A conexão acontece independente da distância.',
   },
   {
     q: 'Qual o investimento?',
-    a: 'Cada processo é personalizado, então o investimento depende do formato que fizer sentido para você. Na conversa inicial, explico as opções com transparência. O que posso dizer é: a exaustão que você sente está consumindo muito mais do que o tempo e o valor que a cura levaria.',
+    a: 'O investimento é conversado na nossa primeira sessão, após entender o que você precisa. Não trabalho com pacotes fechados porque cada processo é único. O que posso dizer é que temos opções de parcelamento.',
   },
   {
     q: 'Quanto tempo leva?',
-    a: 'O processo não tem prazo artificial. A maioria das mulheres percebe mudanças significativas entre 3 e 6 meses. Mas o ritmo é seu. Não apresso, não forço, não encurto o que precisa de tempo.',
+    a: 'Depende da profundidade do que vamos trabalhar. A maioria das mulheres começa a sentir mudanças reais a partir da terceira ou quarta sessão. Um processo completo costuma ter entre 8 e 16 encontros, com encontros semanais ou quinzenais.',
   },
   {
     q: 'E se o problema for a outra pessoa?',
-    a: 'Se o problema fosse só a outra pessoa, você não estaria aqui buscando ajuda. Isso não significa que a outra pessoa não contribua para a dor. Significa que existe algo em você que precisa ser cuidado primeiro. Quando a sua ferida cicatriza, a relação com o outro muda, porque você muda.',
+    a: 'O problema pode estar na outra pessoa. Mas o sofrimento está em você. E é só o seu sofrimento que você tem poder de transformar. Trabalhar a sua ferida não é desculpar o outro. É parar de deixar que o passado dirija o seu presente.',
   },
   {
-    q: 'Vou ficar inconsciente durante a hipnose? Vou perder o controle?',
-    a: 'Não. A hipnose clínica terapêutica é um estado de foco e relaxamento profundo. Você mantém a consciência o tempo todo, lembra de tudo que aconteceu e nenhuma etapa acontece sem o seu consentimento. Não é o que você viu na TV.',
+    q: 'Vou ficar inconsciente durante a hipnose?',
+    a: 'Não. Você permanece consciente, ouvindo tudo, podendo falar a qualquer momento. A hipnose clínica é um estado de relaxamento profundo com foco aumentado — semelhante ao que acontece quando você está totalmente absorta em um livro ou filme.',
   },
 ]
 
-function AccordionItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) {
+const FAQItem = ({ item, index }: { item: typeof FAQS[0]; index: number }) => {
+  const [open, setOpen] = useState(false)
+
   return (
-    <div
-      style={{
-        borderBottom: '1px solid rgba(30,74,43,0.15)',
+    <FadeIn delay={index * 0.06}>
+      <div style={{
+        borderBottom: '1px solid rgba(200,169,110,0.2)',
         overflow: 'hidden',
-      }}
-    >
-      <button
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        style={{
-          width: '100%',
-          background: 'none',
-          border: 'none',
-          padding: '1.5rem 0',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          cursor: 'pointer',
-          textAlign: 'left',
-          gap: '1rem',
-        }}
-      >
-        <span
+      }}>
+        <button
+          onClick={() => setOpen(o => !o)}
           style={{
-            fontFamily: '"Inter", sans-serif',
-            fontWeight: 500,
-            fontSize: '0.95rem',
-            color: '#1E4A2B',
-            lineHeight: 1.4,
-          }}
-        >
-          {q}
-        </span>
-        <span
-          aria-hidden="true"
-          style={{
-            flexShrink: 0,
-            width: '20px',
-            height: '20px',
+            width: '100%',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            color: '#C8A96E',
-            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-            transition: 'transform 0.35s ease',
+            justifyContent: 'space-between',
+            gap: '1.5rem',
+            padding: '1.5rem 0',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            textAlign: 'left',
+            transition: 'background-color 0.2s ease',
+            backgroundColor: open ? 'transparent' : 'transparent',
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'rgba(30,74,43,0.04)'
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M2 5L7 10L12 5" stroke="#C8A96E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </span>
-      </button>
+          <span style={{
+            fontFamily: 'DM Serif Display, serif',
+            fontSize: 'clamp(0.9375rem, 1.3vw, 1.125rem)',
+            color: '#1E4A2B',
+            lineHeight: 1.35,
+          }}>{item.q}</span>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="content"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: 'easeInOut' }}
-            style={{ overflow: 'hidden' }}
+          <motion.span
+            animate={{ rotate: open ? 180 : 0 }}
+            transition={{ duration: 0.25 }}
+            style={{
+              flexShrink: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#C8A96E',
+              opacity: 0.7,
+            }}
           >
-            <p
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '0.9rem',
-                lineHeight: 1.85,
-                color: '#4a4a4a',
-                paddingBottom: '1.5rem',
-              }}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 6L8 11L13 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </motion.span>
+        </button>
+
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              style={{ overflow: 'hidden' }}
             >
-              {a}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+              <p style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '0.9375rem',
+                color: '#1C1C1C',
+                opacity: 0.7,
+                lineHeight: 1.85,
+                paddingBottom: '1.5rem',
+              }}>{item.a}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </FadeIn>
   )
 }
 
-export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
-
-  const toggle = (i: number) => setOpenIndex(prev => (prev === i ? null : i))
-
+export const FAQ = () => {
   return (
-    <section
-      style={{
-        backgroundColor: '#FAF7F2',
-        padding: '7rem 2rem',
-        position: 'relative',
-      }}
-    >
-      <div style={{ maxWidth: '760px', margin: '0 auto' }}>
-        <FadeIn>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <p className="eyebrow-ultra" style={{ color: '#1E4A2B', marginBottom: '1rem' }}>
-              Tire suas dúvidas
-            </p>
-            <h2
-              style={{
-                fontFamily: '"DM Serif Display", serif',
-                fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
-                color: '#1E4A2B',
-                lineHeight: 1.25,
-              }}
-            >
+    <section style={{ backgroundColor: '#F0E8DA', position: 'relative' }}>
+      <div className="container-ultra section-padding">
+        <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 4rem' }}>
+          <FadeIn delay={0}>
+            <p className="eyebrow-ultra" style={{ marginBottom: '1.25rem', color: '#C8A96E' }}>PERGUNTAS SOBRE O PROCESSO</p>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <h2 style={{
+              fontFamily: 'DM Serif Display, serif',
+              fontSize: 'clamp(2rem, 3.5vw, 3rem)',
+              color: '#1E4A2B',
+            }}>
               Perguntas sobre o processo
             </h2>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        </div>
 
-        <FadeIn delay={0.1}>
-          <div>
-            {faqs.map((faq, i) => (
-              <AccordionItem
-                key={i}
-                q={faq.q}
-                a={faq.a}
-                isOpen={openIndex === i}
-                onToggle={() => toggle(i)}
-              />
-            ))}
-          </div>
-        </FadeIn>
+        <div style={{ maxWidth: '760px', margin: '0 auto' }}>
+          {FAQS.map((faq, i) => (
+            <FAQItem key={i} item={faq} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   )

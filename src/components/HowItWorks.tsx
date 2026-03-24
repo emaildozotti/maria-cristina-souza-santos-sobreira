@@ -1,249 +1,189 @@
-import FadeIn from './FadeIn'
+import { motion } from 'motion/react'
+import { FadeIn } from './FadeIn'
+import { RootsDivider } from './RootsDivider'
 
-const steps = [
+const WA_LINK = 'https://wa.me/5527981038931?text=Ol%C3%A1%2C%20Cristina!%20Vi%20sua%20p%C3%A1gina%20e%20quero%20saber%20mais%20sobre%20o%20processo%20de%20Cura%20Interior.'
+
+const STEPS = [
   {
     num: '1',
     title: 'Conversa inicial (gratuita, sem compromisso).',
-    body: 'Uma conversa para entender o que você está vivendo. Sem pressão, sem julgamento. Você fala, eu escuto. E juntas decidimos se o processo faz sentido para você.',
+    text: 'Você me conta o que está carregando. Eu te explico como o processo funciona. Sem julgamento, sem pressão. O objetivo é você entender se faz sentido para o que você está vivendo.',
   },
   {
     num: '2',
     title: 'Como as sessões funcionam.',
-    body: 'O acompanhamento é individualizado. Cada sessão integra ferramentas diferentes conforme a sua necessidade: escuta ativa, hipnose clínica, técnicas de TCC e reprogramação emocional. Não existe sessão genérica. O processo é desenhado para você.',
+    text: 'Trabalhamos juntas em sessões individuais online. Cada encontro tem foco, direção e cuidado. Usamos hipnose clínica, TCC e reprogramação emocional de forma integrada — cada ferramenta no momento certo.',
   },
   {
     num: '3',
     title: 'O que o processo produz.',
-    body: 'Você para de funcionar em modo de sobrevivência. Reconecta com quem é fora dos papéis que cumpre. E a ferida que governava suas escolhas, suas relações e sua exaustão deixa de ter poder sobre você.',
+    text: 'Você começa a identificar os padrões que repetem. A ferida original perde o poder de comandar suas reações. Você ganha acesso a uma versão sua que existia antes da dor. E aprende a ficar com ela.',
   },
 ]
 
-const hypnoFAQ = [
+const FAQ_HIPNOSE = [
   {
     q: 'Vou ficar inconsciente?',
-    a: 'Não. Você mantém o controle o tempo todo. Não há estado de inconsciência, não há apagão, não há nada que você não queira que aconteça.',
+    a: 'Não. Você permanece totalmente consciente durante todo o processo. A hipnose clínica é um estado de foco aprofundado — você ouve tudo, pode falar, pode encerrar quando quiser.',
   },
   {
     q: 'É o que eu vi na TV?',
-    a: 'Não. A hipnose clínica terapêutica não tem relação com o espetáculo. É um estado de foco profundo, como quando você está completamente absorta em algo e o mundo ao redor some por uns instantes.',
+    a: 'Não. A hipnose clínica não tem nada a ver com shows de entretenimento. Não faço você fazer coisas ridículas. Trabalho com o que está guardado na memória emocional para acessar e ressignificar.',
   },
   {
     q: 'Vou lembrar de tudo?',
-    a: 'Sim. Você sai sabendo exatamente o que aconteceu. Sem surpresas, sem revelações que você não escolheu acessar. O processo é conduzido com o seu consentimento em cada etapa.',
+    a: 'Sim. Você tem acesso a tudo que acontece durante a sessão. Inclusive pode se surpreender com o que emerge — coisas que estavam enterradas mas que sempre influenciaram sua vida.',
   },
 ]
 
-export default function HowItWorks() {
+export const HowItWorks = () => {
   return (
-    <section
-      style={{
-        backgroundColor: '#FAF7F2',
-        padding: '7rem 2rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-        <FadeIn>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <p className="eyebrow-ultra" style={{ color: '#1E4A2B', marginBottom: '1rem' }}>
-              Passo a passo
-            </p>
-            <h2
-              style={{
-                fontFamily: '"DM Serif Display", serif',
-                fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
-                color: '#1E4A2B',
-                lineHeight: 1.25,
-              }}
-            >
+    <section id="how-it-works" style={{ backgroundColor: '#E8EDE6', position: 'relative' }}>
+      <div className="container-ultra section-padding">
+        <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 5rem' }}>
+          <FadeIn delay={0}>
+            <p className="eyebrow-ultra" style={{ marginBottom: '1.25rem', color: '#C8A96E' }}>COMO FUNCIONA</p>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <h2 style={{
+              fontFamily: 'DM Serif Display, serif',
+              fontSize: 'clamp(2rem, 3.5vw, 3rem)',
+              color: '#1E4A2B',
+            }}>
               Como é o processo
             </h2>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        </div>
 
-        {/* 3 passos */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', marginBottom: '5rem' }}>
-          {steps.map((step, i) => (
-            <FadeIn key={step.num} delay={i * 0.12}>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '120px 1fr',
-                  gap: '2rem',
-                  alignItems: 'flex-start',
-                }}
-                className="step-row"
-              >
-                {/* Numero decorativo de fundo */}
-                <div
-                  style={{
-                    position: 'relative',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    minHeight: '80px',
-                  }}
-                >
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      fontFamily: '"DM Serif Display", serif',
-                      fontSize: '7.5rem',
-                      lineHeight: 1,
-                      color: '#C8A96E',
-                      opacity: 0.15,
-                      userSelect: 'none',
-                      position: 'absolute',
-                    }}
-                  >
-                    {step.num}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: '"DM Serif Display", serif',
-                      fontSize: '2rem',
-                      color: '#C8A96E',
-                      position: 'relative',
-                      zIndex: 1,
-                    }}
-                  >
-                    {step.num}
-                  </span>
+        {/* Steps */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '760px', margin: '0 auto 4rem' }}>
+          {STEPS.map((step, i) => (
+            <FadeIn key={step.num} delay={i * 0.1}>
+              <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+                <div style={{
+                  flexShrink: 0,
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '50%',
+                  border: '1.5px solid rgba(200,169,110,0.5)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'rgba(30,74,43,0.06)',
+                }}>
+                  <span style={{
+                    fontFamily: 'DM Serif Display, serif',
+                    fontSize: '1.25rem',
+                    color: '#C8A96E',
+                  }}>{step.num}</span>
                 </div>
-                <div style={{ paddingTop: '0.5rem' }}>
-                  <h3
-                    style={{
-                      fontFamily: '"DM Serif Display", serif',
-                      fontSize: '1.25rem',
-                      color: '#1E4A2B',
-                      marginBottom: '0.65rem',
-                      lineHeight: 1.35,
-                    }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: '"Inter", sans-serif',
-                      fontSize: '0.9rem',
-                      lineHeight: 1.85,
-                      color: '#4a4a4a',
-                    }}
-                  >
-                    {step.body}
-                  </p>
+                <div>
+                  <h3 style={{
+                    fontFamily: 'DM Serif Display, serif',
+                    fontSize: 'clamp(1rem, 1.4vw, 1.25rem)',
+                    color: '#1E4A2B',
+                    marginBottom: '0.5rem',
+                  }}>{step.title}</h3>
+                  <p style={{
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '0.9375rem',
+                    color: '#1C1C1C',
+                    opacity: 0.7,
+                    lineHeight: 1.85,
+                  }}>{step.text}</p>
                 </div>
               </div>
             </FadeIn>
           ))}
         </div>
 
-        {/* Desmistificação hipnose */}
-        <FadeIn>
-          <div style={{ marginBottom: '3rem' }}>
-            <p className="eyebrow-ultra" style={{ color: '#1E4A2B', marginBottom: '1.5rem', textAlign: 'center' }}>
-              Sobre a hipnose clínica
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {hypnoFAQ.map((item, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '2rem 1fr',
-                    gap: '1rem',
-                    alignItems: 'flex-start',
-                    padding: '1.5rem',
-                    backgroundColor: '#F0E8DA',
-                    borderLeft: '3px solid rgba(200,169,110,0.4)',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: '"DM Serif Display", serif',
-                      fontSize: '1.4rem',
-                      color: '#C8A96E',
-                      lineHeight: 1,
-                    }}
-                  >
-                    ?
-                  </span>
-                  <div>
-                    <p
-                      style={{
-                        fontFamily: '"Inter", sans-serif',
-                        fontWeight: 600,
-                        fontSize: '0.875rem',
-                        color: '#1E4A2B',
-                        marginBottom: '0.4rem',
-                      }}
-                    >
-                      {item.q}
-                    </p>
-                    <p
-                      style={{
-                        fontFamily: '"Inter", sans-serif',
-                        fontSize: '0.875rem',
-                        lineHeight: 1.8,
-                        color: '#4a4a4a',
-                      }}
-                    >
-                      {item.a}
-                    </p>
-                  </div>
+        {/* Hipnose desmistificação */}
+        <FadeIn delay={0.2}>
+          <div style={{
+            backgroundColor: 'rgba(30,74,43,0.06)',
+            border: '1px solid rgba(200,169,110,0.3)',
+            borderRadius: '12px',
+            padding: '2rem',
+            maxWidth: '760px',
+            margin: '0 auto 4rem',
+          }}>
+            <p style={{
+              fontFamily: 'DM Serif Display, serif',
+              fontSize: '1rem',
+              color: '#1E4A2B',
+              marginBottom: '1.5rem',
+            }}>Sobre a hipnose clínica:</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {FAQ_HIPNOSE.map((item) => (
+                <div key={item.q}>
+                  <p style={{
+                    fontFamily: 'DM Serif Display, serif',
+                    fontSize: '0.9375rem',
+                    color: '#1E4A2B',
+                    marginBottom: '0.25rem',
+                  }}>{item.q}</p>
+                  <p style={{
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '0.875rem',
+                    color: '#1C1C1C',
+                    opacity: 0.65,
+                    lineHeight: 1.8,
+                  }}>{item.a}</p>
                 </div>
               ))}
             </div>
           </div>
         </FadeIn>
 
-        {/* Box destaque */}
-        <FadeIn delay={0.1}>
-          <div
-            style={{
-              padding: '2.5rem 3rem',
-              backgroundColor: '#1E4A2B',
-              borderLeft: '4px solid #C8A96E',
-              marginBottom: '3rem',
-            }}
-          >
-            <p
-              style={{
-                fontFamily: '"DM Serif Text", serif',
-                fontStyle: 'italic',
-                fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
-                lineHeight: 1.75,
-                color: '#FAF7F2',
-                textAlign: 'center',
-              }}
-            >
-              "A dor de não mexer é a que você já carrega todos os dias. A dor do processo
-              é temporária e tem destino: a liberdade."
+        {/* Quote box */}
+        <FadeIn delay={0.25}>
+          <div style={{
+            borderLeft: '3px solid #C8A96E',
+            paddingLeft: '1.5rem',
+            maxWidth: '640px',
+            margin: '0 auto 3rem',
+          }}>
+            <p style={{
+              fontFamily: 'DM Serif Text, serif',
+              fontStyle: 'italic',
+              fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
+              color: '#1C1C1C',
+              opacity: 0.8,
+              lineHeight: 1.75,
+            }}>
+              "A dor de não mexer é a que você já carrega todos os dias. A dor do processo é temporária e tem destino: a liberdade."
             </p>
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.2}>
-          <div style={{ textAlign: 'center' }}>
-            <button
-              onClick={() => document.getElementById('depoimentos')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-shimmer"
+        {/* CTA */}
+        <FadeIn delay={0.3}>
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <motion.a
+              href="#testimonials"
+              className="btn-shimmer-light"
+              whileTap={{ scale: 0.98 }}
+              style={{
+                padding: '0.875rem 2rem',
+                borderRadius: '9999px',
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 500,
+                fontSize: '0.9375rem',
+                letterSpacing: '0.02em',
+                textDecoration: 'none',
+                display: 'inline-block',
+              }}
             >
               Ver o que outras mulheres viveram
-            </button>
+            </motion.a>
           </div>
         </FadeIn>
-      </div>
 
-      <style>{`
-        @media (max-width: 640px) {
-          .step-row {
-            grid-template-columns: 1fr !important;
-            gap: 0.75rem !important;
-          }
-        }
-      `}</style>
+        <FadeIn>
+          <RootsDivider opacity={0.35} />
+        </FadeIn>
+      </div>
     </section>
   )
 }
