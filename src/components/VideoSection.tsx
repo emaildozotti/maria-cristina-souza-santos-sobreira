@@ -87,7 +87,7 @@ export default function VideoSection() {
                   height: '100%',
                   border: 'none',
                 }}
-                src="https://www.youtube.com/embed/PENDENTE"
+                src="https://www.youtube.com/embed/AddLHCszm5k"
                 title="Cristina Sobreira: Cura Interior de Raiz"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
