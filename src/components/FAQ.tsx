@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: 'Qual o investimento?',
-    a: 'O investimento é conversado na nossa primeira sessão, após entender o que você precisa. Não trabalho com pacotes fechados porque cada processo é único. O que posso dizer é que temos opções de parcelamento.',
+    a: 'Trabalho principalmente com pacotes de acompanhamento terapêutico — um processo completo em direção à ressignificação. O investimento é conversado na nossa primeira sessão, após entender o que você precisa. Temos opções de parcelamento.',
   },
   {
     q: 'Quanto tempo leva?',

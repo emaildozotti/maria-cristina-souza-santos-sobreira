@@ -82,7 +82,7 @@ export const About = () => {
                   opacity: 0.75,
                   lineHeight: 1.85,
                 }}>
-                  Minha mãe não queria me ter. Cresci sentindo isso no corpo antes de entender com a cabeça. Fui a menina que precisava ser invisível para não incomodar. A adulta que aprendeu a sorrir enquanto carregava um peso que ninguém via.
+                  Meu pai não queria que eu nascesse. Minha mãe queria — mas vivia sob o controle dele. Cresci sentindo isso no corpo antes de entender com a cabeça. Fui a menina que precisava ser invisível para não incomodar. A adulta que aprendeu a sorrir enquanto carregava um peso que ninguém via.
                 </p>
                 <p style={{
                   fontFamily: 'Inter, sans-serif',
